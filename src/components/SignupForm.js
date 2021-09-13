@@ -1,32 +1,51 @@
 import React, { Component } from 'react';
 import "./App.css";
-import {NavLink} from "react-router-dom";
+import {NavLink, useHistory} from "react-router-dom";
+import axios from 'axios';
+
 
 class SignupForm extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            id: props.user.id,
-            firstName: props.user.firstName,
-            email: props.user.email,
-            username: props.user.username,
-            password: props.user.password
+        state = {
+            id: "",
+            firstName: "",
+            email: "",
+            username: "",
+            password: ""
         };
 
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
+    onFirstNameChange = e => {
+        this.setState({
+            firstName: e.target.value
+        });
+    };
 
-    handleChange = (event) => {
-        let nam = event.target.name;
-        let val = event.target.value;
-        this.setState({ [nam]: val });
-    }
+    onUsernameChange = e => {
+        this.setState({
+            username: e.target.value
+        });
+    };
 
-    handleSubmit = (event) => {
-        console.log('submit');
-        this.props.handleCrud(this.state);
-    }
+    onPasswordChange = e => {
+        this.setState({
+            password: e.target.value
+        });
+    };
+
+    handleSubmit = e => {
+        e.preventDefault();
+        const data = {
+            id: this.state.id,
+            firstName: this.state.firstName,
+            email: this.state.firstName,
+            username: this.state.username,
+            password: this.password
+        }
+
+        axios
+            .post("https://localhost:8080/register", data)
+            .then(res => console.log(res))
+            .catch(res => console.log(res))
+    };
 
     render(){
         console.log(this.state);
@@ -36,10 +55,10 @@ class SignupForm extends Component {
                 <img src="/images/Cognixia.png"/>
     
                 <form onSubmit={this.handleSubmit}>
-                    <input type="firstName" id="firstName" name="firstName" placeholder="First Name" value={this.state.firstName} onChange={this.handleChange} required></input><br/>
-                    <input type="username" id="username" name="username" placeholder="Username" value={this.state.username} onChange={this.handleChange} ></input><br/>
-                    <input type="password" id="password" name="password" placeholder="Password" value={this.state.password} onChange={this.handleChange}></input><br/><br/>
-                    <input type="submit" value="Submit" />
+                    <input type="firstName" id="firstName" name="firstName" placeholder="First Name" value={this.state.firstName} onChange={this.onFirstNameChange} required></input><br/>
+                    <input type="username" id="username" name="username" placeholder="Username" value={this.state.username} onChange={this.onUsernameChange} ></input><br/>
+                    <input type="password" id="password" name="password" placeholder="Password" value={this.state.password} onChange={this.onPasswordChange}></input><br/><br/>
+                    <input type="submit" value="Submit" onClick={()=> {history.push("/success")}} />
                 </form>
             <div style={{paddingTop: "50px"}}>
                 <NavLink  style={{ paddingTop: "100px", fontSize: "2.5em", color: "white", textDecoration: "underline", margin: "50px"}} exact to="/" >Home</NavLink>
