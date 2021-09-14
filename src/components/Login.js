@@ -26,6 +26,8 @@ class LoginForm extends Component {
         axios.post(`http://localhost:8080/authenticate`, user)
             .then(res => {
                 console.log(res);
+                // storing jwt in localstorage 
+                localStorage.setItem('jwt',res.data.token);
             })
 
     }
