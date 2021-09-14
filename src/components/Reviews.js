@@ -47,7 +47,6 @@ class ReviewForm extends Component {
             .then(res => {
                 console.log(res);
                 // storing jwt in localstorage 
-                localStorage.setItem('jwt',res.data.token);
             })
 
     }
