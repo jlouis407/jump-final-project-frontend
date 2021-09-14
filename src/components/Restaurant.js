@@ -5,7 +5,7 @@ const Restaurant = props => {
         <div>
             <ul>
                 <li>Name: {props.name}</li>
-                <li>Color: {props.description}</li>
+                <li>Description: {props.description}</li>
             </ul>
         </div>
     );
