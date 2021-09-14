@@ -13,23 +13,23 @@ class Login extends Component {
 
     onUsernameChange = e => {
       this.setState({
-        title: e.target.value
+        username: e.target.value
       });
     };
 
     onPasswordChange = e => {
       this.setState({
-        body: e.target.value
+        password: e.target.value
       });
     };
     handleSubmit = e => {
       e.preventDefault();
       const data = {
-        title: this.state.username,
-        body: this.state.password
+        username: this.state.username,
+        password: this.state.password
       };
       axios
-        .post("https://localhost:8080/authenticate", data)
+        .post("http://localhost:8080/authenticate", data)
         .then(res => console.log(res))
         .catch(err => console.log(err));
     };

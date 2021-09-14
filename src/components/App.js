@@ -7,6 +7,7 @@ import Footer from "./Footer";
 import "./App.css";
 import {Route} from "react-router-dom";
 import axios from "axios";
+import Success from "./Success";
 
 function App(){
     return (
@@ -14,6 +15,7 @@ function App(){
         <Route exact path="/" component={Home}/>
         <Route exact path="/login" component={Login}/>
         <Route exact path="/signup" component={Signup}/>
+        <Route exact path="/success" component={Success}/>
     </div>
     )
 }

@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import "./App.css";
-import {NavLink, useHistory} from "react-router-dom";
+import {NavLink, Redirect} from "react-router-dom";
 import axios from 'axios';
 
 
+
+
 class SignupForm extends Component {
+
         state = {
             id: "",
             firstName: "",
@@ -31,38 +34,42 @@ class SignupForm extends Component {
         });
     };
 
+
     handleSubmit = e => {
         e.preventDefault();
         const data = {
-            id: this.state.id,
             firstName: this.state.firstName,
-            email: this.state.firstName,
             username: this.state.username,
             password: this.password
         }
 
         axios
-            .post("https://localhost:8080/register", data)
+            .post("http://localhost:8080/register", data)
             .then(res => console.log(res))
             .catch(res => console.log(res))
     };
 
+    onSubmit = () => {
+        return <Redirect to="/success"/>
+    }
+
     render(){
-        console.log(this.state);
+       
         return (
-            <div>
+            <div className="post">
                 <h1 style={{color: "white"}}>SIGNUP</h1>
                 <img src="/images/Cognixia.png"/>
     
-                <form onSubmit={this.handleSubmit}>
+                <form className="post" onSubmit={this.handleSubmit}>
                     <input type="firstName" id="firstName" name="firstName" placeholder="First Name" value={this.state.firstName} onChange={this.onFirstNameChange} required></input><br/>
                     <input type="username" id="username" name="username" placeholder="Username" value={this.state.username} onChange={this.onUsernameChange} ></input><br/>
                     <input type="password" id="password" name="password" placeholder="Password" value={this.state.password} onChange={this.onPasswordChange}></input><br/><br/>
-                    <input type="submit" value="Submit" onClick={()=> {history.push("/success")}} />
+                    <button type="submit" value="Submit">Submit</button>
                 </form>
-            <div style={{paddingTop: "50px"}}>
-                <NavLink  style={{ paddingTop: "100px", fontSize: "2.5em", color: "white", textDecoration: "underline", margin: "50px"}} exact to="/" >Home</NavLink>
-            </div>
+            
+           {
+
+           }
             </div>
         )
 

@@ -1,10 +1,9 @@
 import React from "react";
-import {Redirect} from "react-router-dom";
 
-function Success({authorized}){
-    if(!authorized){
-        return <Redirect to="/login"/>
-    }
+function Success(){
+    return (
+        <div>You have created an account!</div>
+    )
 
 }
 
