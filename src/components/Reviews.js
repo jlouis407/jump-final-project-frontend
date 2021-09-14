@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import "./App.css";
 import {NavLink} from "react-router-dom";
 import axios from "axios";
-import StarRatings from './react-star-ratings';
+//import StarRatings from './react-star-ratings';
 
 
 
@@ -23,11 +23,11 @@ class ReviewForm extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-     changeRating(newRating, name){
+     /* changeRating(newRating, name){
          this.setState({
              rating: newRating
          })
-     }
+     } */
 
     handleSubmit = (event) => {
         event.preventDefault();
@@ -72,10 +72,10 @@ class ReviewForm extends Component {
                 <h1 style={{color: "white"}}>LOGIN</h1>
                 <img src="/images/Cognixia.png"/>
 
-                <StarRatings
+                {/* <StarRatings
                     rating = {this.state.rating}
                     starRatedColor= "yellow" changeRating={this.changeRating}
-                    numberOfStars = {5} name = 'rating'/>
+                    numberOfStars = {5} name = 'rating'/> */}
 
                 <form onSubmit={this.handleSubmit}>
                     {/* <label for="email"></label> */}
@@ -91,4 +91,4 @@ class ReviewForm extends Component {
     };
 }
 
-export default LoginForm;
+export default ReviewForm;

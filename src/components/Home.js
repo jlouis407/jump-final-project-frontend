@@ -37,7 +37,7 @@ const [name, setName] = useState("");
     return (
         <div>
         <h1 style={{color: "white"}}>Home</h1>
-        <button onClick={getRestaurants}>Get Cars</button>
+        <button onClick={getRestaurants}>Show Restaurants</button>
         <img src="/images/Cognixia.png"/>
              <nav style={{paddingBottom: "100px"}}>
                <NavLink style={{fontSize: "2.5em", color: "white", textDecoration: "underline", margin: "50px"}} exact to="/login" >Log In</NavLink>
