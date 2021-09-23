@@ -12,6 +12,7 @@ const Home = () => {
     
 const [restaurants, setRestaurants] = useState([]);
 const [name, setName] = useState("");
+const [searchedRestaurants, setSearchedRestaurants] = useState([]);
 
     const getRestaurants = () => {
 
@@ -29,9 +30,22 @@ const [name, setName] = useState("");
 
     }
 
-    const handleChange = e =>{
-        
-        setName(e.target.value)
+    const handleChange = (e) =>{
+        let searchedWord = e.target.value;
+        let searchedWordLength = searchedWord.length;
+        console.log(searchedWord.length)
+        restaurants.map((restaurant) => {
+            let restaurantName = restaurant.name;
+            let restaurantNameSubString = restaurantName.substring(0,searchedWordLength);
+
+            (restaurantNameSubString === searchedWord) && (setSearchedRestaurants
+                (searchedRestaurants.concat(restaurant)));
+            
+        })
+        searchedRestaurants.map((restaurant) => {
+            <Restaurant name = {restaurant.name} description = {restaurant.description}/>
+        })
+        setName(e.target.value) 
     }
 
     return (
@@ -43,12 +57,12 @@ const [name, setName] = useState("");
                <NavLink style={{fontSize: "2.5em", color: "white", textDecoration: "underline", margin: "50px"}} exact to="/login" >Log In</NavLink>
                <NavLink style={{fontSize: "2.5em", color: "white", textDecoration: "underline", margin: "50px" }} exact to="/signup" activeClassName="active">Sign Up</NavLink>
             </nav>
-       {/*  <form onSubmit={getRestaurants}> 
+         <form onSubmit={getRestaurants}> 
             <label>
-                <input margin="50px" size="30" type="text" name="name" placeholder="Search for a restaurant..." value = {this.state.name} onChange={this.handleChange}/>
+                <input margin="50px" size="30" type="text" name="name" placeholder="Search for a restaurant..." onChange={handleChange}/>
             </label>
             <input type="submit" value="Go" />
-        </form> */}
+        </form> 
             <Footer class="footer"/>
         </div>
     ); 
