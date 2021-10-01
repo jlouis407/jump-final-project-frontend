@@ -4,6 +4,7 @@ import {NavLink} from "react-router-dom";
 
 import "./App.css";
 import Restaurant from "./Restaurant";
+import { render } from "@testing-library/react";
 
 
 const Home = () => {
@@ -31,19 +32,25 @@ const [searchedRestaurants, setSearchedRestaurants] = useState([]);
     }
 
     const handleChange = (e) =>{
+        e.preventDefault();
         let searchedWord = e.target.value;
         let searchedWordLength = searchedWord.length;
-        console.log(searchedWord.length)
         restaurants.map((restaurant) => {
             let restaurantName = restaurant.name;
             let restaurantNameSubString = restaurantName.substring(0,searchedWordLength);
 
-            (restaurantNameSubString === searchedWord) && (setSearchedRestaurants
-                (searchedRestaurants.concat(restaurant)));
-            
-        })
-        searchedRestaurants.map((restaurant) => {
-            <Restaurant name = {restaurant.name} description = {restaurant.description}/>
+
+            console.log("Restaurant Name substring" + restaurantNameSubString);
+            console.log("Searched word " + searchedWord);
+
+            if(restaurantNameSubString === searchedWord){
+                console.log(restaurant.name + " has been returned!");
+                //This is what I would like to do.....
+                //    <Restaurant name = {restaurant.name} description = {restaurant.description}/>
+                
+            }
+            (restaurantNameSubString === searchedWord) && (
+                console.log(restaurant.name + " has been returned!"));
         })
         setName(e.target.value) 
     }
@@ -51,17 +58,16 @@ const [searchedRestaurants, setSearchedRestaurants] = useState([]);
     return (
         <div>
         <h1 style={{color: "white"}}>Home</h1>
-        <button onClick={getRestaurants}>Show Restaurants</button>
+        {getRestaurants}
         <img src="/images/Cognixia.png"/>
              <nav style={{paddingBottom: "100px"}}>
                <NavLink style={{fontSize: "2.5em", color: "white", textDecoration: "underline", margin: "50px"}} exact to="/login" >Log In</NavLink>
                <NavLink style={{fontSize: "2.5em", color: "white", textDecoration: "underline", margin: "50px" }} exact to="/signup" activeClassName="active">Sign Up</NavLink>
             </nav>
-         <form onSubmit={getRestaurants}> 
+         <form> 
             <label>
                 <input margin="50px" size="30" type="text" name="name" placeholder="Search for a restaurant..." onChange={handleChange}/>
             </label>
-            <input type="submit" value="Go" />
         </form> 
             <Footer class="footer"/>
         </div>
